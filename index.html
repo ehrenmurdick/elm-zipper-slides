@@ -4,9 +4,9 @@
 <head>
 <meta charset="utf-8">
 
-<title>Contract testing ruby</title>
+<title>Zippers in Elm</title>
 
-<meta name="description" content="End to end testing vs contracts">
+<meta name="description" content="Zippers in Elm">
 <meta name="author" content="Ehren Murdick">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,20 +32,36 @@
     </section>
 
     <section>
-      <h1>Regular Expressions</h1>
+      <h1>Zippers in Elm</h1>
+    </section>
+
+
+    <section>
+      <p>Editing one item in a list</p>
+      <pre><code class="hljs ruby">sildes = [
+  { title: "first" },
+  { title: "second" },
+  ...
+]
+
+slides[4]["title"] = "updated"</code></pre>
     </section>
 
 
 
     <section>
       <h3>Links</h3>
-      <p><a href="http://github.com/ehrenmurdick/container_talk">github.com/ehrenmurdick/container_talk</a></p>
-      <p><a href="http://github.com/ehrenmurdick/generating_generics">github.com/ehrenmurdick/generating_generics</a></p>
+      <p><a href="http://github.com/ehrenmurdick/container_talk">github.com/ehrenmurdick/elm-zipper-slides</a></p>
     </section>
   </div>
 </div>
 
 <style type="text/css">
+code {
+  font-family: monospace;
+  font-variant-ligatures: none !important;
+}
+
 li.check:before {
   content: "\2713";
   margin-left: -1em;
