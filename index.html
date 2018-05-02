@@ -37,21 +37,48 @@
 
 
     <section>
-      <p>Editing one item in a list</p>
-      <pre><code class="hljs ruby">sildes = [
+      <section>
+        <p>Editing one item in a list</p>
+        <pre><code class="hljs ruby">sildes = [
   { title: "first" },
   { title: "second" },
   ...
 ]
+current_index = 4
 
-slides[4]["title"] = "updated"</code></pre>
+def next
+  current_index = current_index + 1
+end
+
+def update_title_at(new_title)
+  slides[current_index]["title"] = "updated"
+end</code></pre>
+      </section>
+
+      <section>
+        <p>Editing one item in a list</p>
+        <pre><code class="hljs elm">updateCurrentSlideTitle : String -&gt; Model -&gt; Model
+updateCurrentSlideTitle newTitle model =
+    let
+        newSlides =
+            List.indexedMap
+                (\idx slide -&gt;
+                    if idx == model.currentIndex then
+                        { slide | title = newTitle }
+                    else
+                        slide
+                )
+                model.slides
+    in
+        { model | slides = newSlides }</code></pre>
+      </section>
     </section>
-
 
 
     <section>
       <h3>Links</h3>
-      <p><a href="http://github.com/ehrenmurdick/container_talk">github.com/ehrenmurdick/elm-zipper-slides</a></p>
+      <p><a href="http://github.com/ehrenmurdick/elm-zipper-slides">github.com/ehrenmurdick/elm-zipper-slides</a></p>
+      <p><a href="http://github.com/ehrenmurdick/sildes">github.com/ehrenmurdick/sildes</a></p>
     </section>
   </div>
 </div>
