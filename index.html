@@ -47,22 +47,38 @@
 
 
     <section>
-      <p>Editing one item in a list</p>
-      <pre><code class="hljs ruby">sildes = [
-  { title: "first" },
-  { title: "second" },
-  ...
-]
-current_index = 4
-
-def next
-  current_index = current_index + 1
-end
-
-def update_title_at(new_title)
-  slides[current_index]["title"] = "updated"
+      <h4>Ruby version</h4>
+      <section>
+        <small>Model</small>
+        <pre><code class="hljs ruby">def initialize
+  @sildes = [
+    { title: "first" },
+    { title: "second" },
+    ...
+  ]
+  @current_index = 4
 end</code></pre>
+      </section>
+
+
+      <section>
+        <small>Next</small>
+        <pre><code class="hljs ruby">def next
+  @current_index = @current_index + 1
+end</code></pre>
+      </section>
+
+      <section>
+        <small>Update</small>
+        <pre><code class="hljs ruby">def update_current_slide_title(new_title)
+  @slides[@current_index]["title"] = new_title
+end</code></pre>
+      </section>
+
+
+
     </section>
+
 
     <section>
       <p>Editing one item in a list</p>
