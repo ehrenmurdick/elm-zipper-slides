@@ -171,6 +171,17 @@ type alias Model =
       </section>
 
       <section>
+        <small>State (cont.)</small>
+        <pre><code class="hljs elm">init : Model
+init =
+    { slides =
+        Zipper { title = "first" }
+            [ { title = "second" } ]
+            []
+    }</code></pre>
+      </section>
+
+      <section>
         <small>Next Slide</small>
         <pre><code class="hljs elm">next : Zipper a -&gt; Zipper a
 next zipper =
@@ -202,6 +213,14 @@ updateCurrentSlideTitle newTitle model =
     in
         { model | slides = newSlides }</code></pre>
       </section>
+    </section>
+
+    <section>
+      <h4>What just happened?</h4>
+      <ul>
+        <li class="fragment">Compiler enforced bounds checking</li>
+        <li class="fragment">Better performance on updates</li>
+      </ul>
     </section>
 
 

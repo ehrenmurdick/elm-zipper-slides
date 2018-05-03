@@ -10,6 +10,15 @@ type alias Model =
     }
 
 
+init : Model
+init =
+    { slides =
+        Zipper { title = "first" }
+            [ { title = "second" } ]
+            []
+    }
+
+
 next : Zipper a -> Zipper a
 next zipper =
     let
