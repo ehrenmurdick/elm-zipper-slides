@@ -19,6 +19,20 @@ init =
     }
 
 
+prev : Zipper a -> Zipper a
+prev =
+    flip << next << flip
+
+
+flip : Zipper a -> Zipper a
+flip zipper =
+    let
+        (Zipper x xs ys) =
+            zipper
+    in
+        (Zipper x ys xs)
+
+
 next : Zipper a -> Zipper a
 next zipper =
     let

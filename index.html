@@ -33,11 +33,12 @@
 
     <section>
       <h1>Zippers in Elm</h1>
+      <img src="imgs/zipper.png" />
     </section>
 
 
     <section>
-      <h3>The problem...</h3>
+      <h3>The problem</h3>
       <ul>
         <li class="fragment">A slide editor</li>
         <li class="fragment">Advance through slides</li>
@@ -55,9 +56,9 @@
   @sildes = [
     { title: "first" },
     { title: "second" },
-    ...
+    &hellip;
   ]
-  @current_index = 4
+  @current_index = 0
 end</code></pre>
       </section>
 
@@ -106,7 +107,7 @@ init =
     , slides =
         [ { title = "first" }
         , { title = "second" }
-        ...
+        &hellip;
         ]
     }</code></pre>
       </section>
@@ -176,7 +177,7 @@ type alias Model =
 init =
     { slides =
         Zipper { title = "first" }
-            [ { title = "second" } ]
+            [ { title = "second" }, &hellip; ]
             []
     }</code></pre>
       </section>
@@ -221,8 +222,27 @@ updateCurrentSlideTitle newTitle model =
         <li class="fragment">Compiler enforced bounds checking</li>
         <li class="fragment">Better performance on updates</li>
       </ul>
+      <p class="fragment">But &hellip;</p>
+      <ul>
+        <li class="fragment">Mapping is a litte harder</li>
+        <li class="fragment">Don't have current index handy</li>
+      </ul>
     </section>
 
+    <section>
+      <h4>Bonus</h4>
+        <pre><code class="hljs elm">flip : Zipper a -&gt; Zipper a
+flip zipper =
+    let
+        (Zipper x xs ys) =
+            zipper
+    in
+        (Zipper x ys xs)</code></pre>
+
+        <pre class="fragment"><code class="hljs elm">prev : Zipper a -&gt; Zipper a
+prev =
+    flip &lt;&lt; next &lt;&lt; flip</code></pre>
+    </section>
 
     <section>
       <h3>Links</h3>
