@@ -186,6 +186,22 @@ next zipper =
                 Zipper x xs (current :: prev)</code></pre>
       </section>
 
+      <section>
+        <small>Update</small>
+        <pre><code class="hljs elm">updateCurrentSlideTitle : String -&gt; Model -&gt; Model
+updateCurrentSlideTitle newTitle model =
+    let
+        (Zipper current next prev) =
+            model.slides
+
+        updatedSlide =
+            { current | title = newTitle }
+
+        newSlides =
+            (Zipper updatedSlide next prev)
+    in
+        { model | slides = newSlides }</code></pre>
+      </section>
     </section>
 
 

@@ -26,4 +26,14 @@ next zipper =
 
 updateCurrentSlideTitle : String -> Model -> Model
 updateCurrentSlideTitle newTitle model =
-    model
+    let
+        (Zipper current next prev) =
+            model.slides
+
+        updatedSlide =
+            { current | title = newTitle }
+
+        newSlides =
+            (Zipper updatedSlide next prev)
+    in
+        { model | slides = newSlides }
