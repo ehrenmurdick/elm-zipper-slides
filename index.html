@@ -48,8 +48,9 @@
 
     <section>
       <h4>Ruby version</h4>
+
       <section>
-        <small>Model</small>
+        <small>State</small>
         <pre><code class="hljs ruby">def initialize
   @sildes = [
     { title: "first" },
@@ -62,9 +63,11 @@ end</code></pre>
 
 
       <section>
-        <small>Next</small>
+        <small>Next Slide</small>
         <pre><code class="hljs ruby">def next
-  @current_index = @current_index + 1
+  if @current_index &lt; @slides.length - 1
+    @current_index = @current_index + 1
+  end
 end</code></pre>
       </section>
 
@@ -75,14 +78,54 @@ end</code></pre>
 end</code></pre>
       </section>
 
-
-
     </section>
 
 
     <section>
-      <p>Editing one item in a list</p>
-      <pre><code class="hljs elm">updateCurrentSlideTitle : String -&gt; Model -&gt; Model
+      <h4>Naive Elm port</h4>
+
+      <section>
+        <small>State</small>
+        <pre><code class="hljs elm">type alias Slide =
+    { title : String
+    }
+
+
+type alias Model =
+    { currentIndex : Int
+    , slides : List Slide
+    }</code></pre>
+      </section>
+
+
+      <section>
+        <small>State (cont.)</small>
+        <pre><code class="hljs elm">init : Model
+init =
+    { currentIndex = 0
+    , slides =
+        [ { title = "first" }
+        , { title = "second" }
+        ...
+        ]
+    }</code></pre>
+      </section>
+
+
+      <section>
+        <small>Next Slide</small>
+        <pre><code class="hljs elm">next : Model -&gt; Model
+next model =
+    if model.currentIndex &lt; (List.length model.slides) - 1 then
+        { model | currentIndex = model.currentIndex + 1 }
+    else
+        model</code></pre>
+      </section>
+
+
+      <section>
+        <small>Update</small>
+        <pre><code class="hljs elm">updateCurrentSlideTitle : String -&gt; Model -&gt; Model
 updateCurrentSlideTitle newTitle model =
     let
         newSlides =
@@ -96,6 +139,53 @@ updateCurrentSlideTitle newTitle model =
                 model.slides
     in
         { model | slides = newSlides }</code></pre>
+        <small class="fragment">(╯°□°)╯︵ ┻━┻</small>
+      </section>
+
+
+
+
+    </section>
+
+    <section>
+      <h4>Introducing the Zipper!</h4>
+
+      <section>
+        <small>
+          <blockquote cite="https://en.wikipedia.org/wiki/Zipper_(data_structure)">
+            A zipper is a technique of representing an aggregate data structure so that it is convenient for writing programs that traverse the structure arbitrarily and update its contents, especially in purely functional programming languages.
+          </blockquote>
+          <cite><a href="https://en.wikipedia.org/wiki/Zipper_(data_structure)">Wikipedia</a></cite>
+        </small>
+      </section>
+
+      <section>
+        <small>State</small>
+        <pre><code class="hljs elm">type Zipper a
+    = Zipper a (List a) (List a)
+
+
+type alias Model =
+    { slides : Zipper Slide
+    }</code></pre>
+      </section>
+
+      <section>
+        <small>Next Slide</small>
+        <pre><code class="hljs elm">next : Zipper a -&gt; Zipper a
+next zipper =
+    let
+        (Zipper current next prev) =
+            zipper
+    in
+        case next of
+            [] -&gt;
+                zipper
+
+            x :: xs -&gt;
+                Zipper x xs (current :: prev)</code></pre>
+      </section>
+
     </section>
 
 

@@ -22,6 +22,14 @@ init =
     }
 
 
+next : Model -> Model
+next model =
+    if model.currentIndex < (List.length model.slides) - 1 then
+        { model | currentIndex = model.currentIndex + 1 }
+    else
+        model
+
+
 updateCurrentSlideTitle : String -> Model -> Model
 updateCurrentSlideTitle newTitle model =
     let
